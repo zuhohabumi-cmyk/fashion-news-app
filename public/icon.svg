@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="Fashion News">
+  <rect width="192" height="192" rx="32" fill="#24231f"/>
+  <path d="M30 38h132M30 154h132" stroke="#aa533d" stroke-width="5"/>
+  <text x="96" y="120" text-anchor="middle" fill="#f6f3ed" font-family="Georgia,serif" font-size="70">F</text>
+</svg>
+
