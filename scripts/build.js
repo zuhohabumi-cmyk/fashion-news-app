@@ -4,9 +4,18 @@ const Parser = require('rss-parser');
 const { CATEGORIES, deduplicate, fromFeedItem, isFashionRelevant } = require('../lib/articles');
 
 const root = path.resolve(__dirname, '..');
-const parser = new Parser({ timeout: 10000, headers: { 'User-Agent': 'Fashion News Reader/1.0' } });
+const parser = new Parser();
 
-async function fetchArticles(feeds, parse = url => parser.parseURL(url)) {
+async function parseFeed(url) {
+  const response = await fetch(url, {
+    headers: { 'User-Agent': 'Fashion News Reader/1.0' },
+    signal: AbortSignal.timeout(10000)
+  });
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return parser.parseString(await response.text());
+}
+
+async function fetchArticles(feeds, parse = parseFeed) {
   const all = [];
   let successfulFeeds = 0;
   for (const feed of feeds) {
